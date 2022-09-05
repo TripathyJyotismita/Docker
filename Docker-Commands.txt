@@ -1,0 +1,67 @@
+CREATE A NEW IMAGE FROM DOCKER CONTAINER ITSELF:
+Image: bodnetsync
+
+GET THE OCONTAINER ID:
+sudo docker ps -aqf "name=bulkfeasnetsync_2.0.0-25_0"
+bpadmin@ip-10-78-68-96:~$ sudo docker ps -aqf "name=bulkfeasnetsync_2.0.0-25_0"
+453290e101e3
+
+sudo docker commit <container-id> artifactory.ciena.com/blueplanet/bodnetsync:<version>
+sudo docker commit 453290e101e3 artifactory.ciena.com/blueplanet/bodnetsync:2.0.0-25_bulkfeas
+bpadmin@ip-10-78-68-96:~$ sudo docker commit 453290e101e3 artifactory.ciena.com/blueplanet/bodnetsync:2.0.0-25_bulkfeas
+sha256:3fb96d075884108a41d20a52cb605bd32880d02ca1c610a0782a12d1d2987c0a
+bpadmin@ip-10-78-68-96:~$
+
+CHECK IF IMAGE IS CREATED:
+bpadmin@ip-10-78-68-96:~$ sudo docker images
+REPOSITORY                                                          TAG                                   IMAGE ID            CREATED             SIZE
+artifactory.ciena.com/blueplanet/bodnetsync                         2.0.0-25_bulkfeas                     3fb96d075884        26 seconds ago      861.7 MB
+
+PUSH THE IMAGE: (Docker login is required to push an image.)
+docker login --username=bpplatlab1 --password=AKCp5Zk9KNtWfBnQyrRY55TEjHs2F4WHVcqFQZ2moJTsk2vQVQ63heaS2Ly9PkgiwdwU71rbr artifactory.ciena.com
+
+docker push artifactory.ciena.com/blueplanet/bodnetsync:2.0.0-25_bulkfeas
+
+
+=========================================================================================================
+BASIC COMMAND:
+docker ps
+
+$ docker stop my_container
+
+sudo docker ps
+
+sudo docker create --name firstkill bitnami/wordpress
+
+sudo docker ps -a
+
+sudo docker run fe1f71042611
+
+sudo docker pause fe1f71042611
+
+sudo docker images
+sudo docker rmi
+
+docker container ls -a
+
+You can also generates a list of all the containers only by their numeric ID’s, run the command:
+docker container ls –aq 
+
+To stop all containers, enter:
+docker container stop $(docker container ls –aq)
+
+docker container rm [container_id]
+docker container rm $(docker container ls –aq)
+
+docker container stop $(docker container ls –aq) && docker system prune –af ––volumes
+
+VOLUME:
+A volume is used to store Docker data.
+It helps store and organize data outside containers in a way that it’s accessible to multiple containers.
+docker volume ls
+docker volume rm VolumeName
+
+Remove All Unused Docker Objects
+The prune command automatically removes all resources that aren’t associated with a container. This is a streamlined way to clean up unused images, containers, volumes, and networks.
+
+docker system prune
